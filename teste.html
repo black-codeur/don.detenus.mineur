@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mur de soutien - Citations inspirantes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .quote-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .quote {
+            position: absolute;
+            font-size: 18px;
+            background-color: #ffeb3b;
+            color: #2c3e50;
+            border-radius: 50%;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .quote:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Animation des ballons flottants */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-100px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quote-container" id="quoteContainer"></div>
+
+    <script>
+        const quotes = [
+            "L'espoir est le pilier du monde.",
+            "Chaque petit pas compte dans le chemin du changement.",
+            "Les rêves ne connaissent pas de barreaux.",
+            "Ensemble, on peut reconstruire des vies.",
+            "La liberté commence dans l'esprit.",
+            "La réinsertion est une renaissance.",
+            "Les erreurs font partie du chemin vers la sagesse.",
+            "Chaque jour est une nouvelle chance."
+        ];
+
+        const quoteContainer = document.getElementById('quoteContainer');
+
+        function createQuote() {
+            // Crée une citation flottante
+            const quoteElement = document.createElement('div');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            quoteElement.classList.add('quote');
+            quoteElement.innerText = randomQuote;
+
+            // Positionnement aléatoire des citations sur la page
+            const randomX = Math.random() * (window.innerWidth - 200);
+            const randomY = Math.random() * (window.innerHeight - 100);
+            quoteElement.style.left = `${randomX}px`;
+            quoteElement.style.top = `${randomY}px`;
+
+            // Animation de la citation
+            quoteElement.style.animation = `float ${Math.random() * 3 + 4}s ease-in-out infinite`;
+
+            // Ajoute la citation à la page
+            quoteContainer.appendChild(quoteElement);
+
+            // Enlève la citation après l'animation
+            setTimeout(() => {
+                quoteContainer.removeChild(quoteElement);
+            }, (Math.random() * 3 + 4) * 1000);
+        }
+
+        // Crée une citation toutes les 2 à 4 secondes
+        setInterval(createQuote, Math.random() * 2000 + 2000);
+    </script>
+
+</body>
+</html>
